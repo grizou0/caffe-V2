@@ -1,3 +1,46 @@
-Installation à partir d'une réinstallation Ubuntu 16.04.
---------------------------------------------------------
-En test.
+Update Ubuntu
+-------------
+sudo apt-get update
+Install Prerequis
+-----------------
+sudo apt-get install -y --no-install-recommends \
+      build-essential \
+      git \
+      libgoogle-glog-dev \
+      libgtest-dev \
+      libiomp-dev \
+      libleveldb-dev \
+      liblmdb-dev \
+      libopencv-dev \
+      libopenmpi-dev \
+      libsnappy-dev \
+      libprotobuf-dev \
+      openmpi-bin \
+      openmpi-doc \
+      protobuf-compiler \
+      python-dev \
+      python-pip                          
+pip install --user \
+      future \
+      numpy \
+      protobuf \
+      typing \
+      hypothesis
+      
+sudo apt-get install -y --no-install-recommends \
+      libgflags-dev \
+      cmake
+Install Pytorch
+----------------
+git clone https://github.com/pytorch/pytorch.git && cd pytorch
+git submodule update --init --recursive
+python setup.py install
+
+cd ~ && python -c 'from caffe2.python import core' 2>/dev/null && echo "Success" || echo "Failure"
+python caffe2/python/operator_test/activation_ops_test.py
+
+sudo apt-get update && sudo apt-get install wget -y --no-install-recommends
+wget "http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb"
+sudo dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
+sudo apt-get update
+sudo apt-get install cuda
